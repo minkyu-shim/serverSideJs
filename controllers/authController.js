@@ -9,7 +9,7 @@ export const registerHandler = async (req, res) => {
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "24h" });
         res.status(201).json({ token, user: { id: user.id, email: user.email } });
     } catch (err) {
-        res.status(400).json({ msg: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -19,6 +19,6 @@ export const loginHandler = async (req, res) => {
         const result = await login(email, password);
         res.status(200).json(result);
     } catch (err) {
-        res.status(401).json({ msg: err.message });
+        res.status(401).json({ message: err.message });
     }
 };
