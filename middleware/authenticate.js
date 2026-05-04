@@ -4,7 +4,7 @@ const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return res.status(401).json({ msg: "No token provided" });
+        return res.status(401).json({ message: "No token provided" });
     }
 
     const token = authHeader.split(" ")[1];
@@ -14,7 +14,7 @@ const authenticate = (req, res, next) => {
         req.user = decoded; // { userId, email } now available in route handlers
         next();
     } catch {
-        res.status(401).json({ msg: "Invalid or expired token" });
+        res.status(401).json({ message: "Invalid or expired token" });
     }
 };
 

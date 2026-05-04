@@ -1,10 +1,10 @@
 import express from "express";
 import {
-  getAllCourses,
-  getCourseById,
-  createCourseHandler,
-  updateCourseHandler,
-  deleteCourseHandler,
+    getAllCourses,
+    getCourseById,
+    createCourseHandler,
+    updateCourseHandler,
+    deleteCourseHandler,
 } from "../controllers/coursesController.js";
 import authenticate from "../middleware/authenticate.js";
 
