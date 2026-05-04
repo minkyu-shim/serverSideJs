@@ -4,10 +4,7 @@ export const findAllGrades = () => Grade.find();
 
 export const findGradeById = (id) => Grade.findById(id);
 
-// TODO: return all grades that belong to a specific student
-export const findGradesByStudent = (studentId) => {
-    // hint: filter by studentId field
-};
+export const findGradesByStudent = (studentId) => Grade.find({ studentId });
 
 export const createGrade = (data) => Grade.create(data);
 

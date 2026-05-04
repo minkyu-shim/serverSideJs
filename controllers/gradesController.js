@@ -17,26 +17,49 @@ export const getAllGrades = async (req, res) => {
 };
 
 export const getGradeById = async (req, res) => {
-    // TODO: fetch a single grade by its id
-    // hint: look at getStudentById in studentsController for reference
+    try {
+        const grade = await findGradeById(req.params.id);
+        if (!grade) return res.status(404).json({ msg: "Grade not found" });
+        res.status(200).json(grade);
+    } catch {
+        res.status(400).json({ msg: "Invalid grade ID" });
+    }
 };
 
 export const getGradesByStudent = async (req, res) => {
-    // TODO: return all grades for a given student
-    // the student id comes from req.params.studentId
+    try {
+        const grades = await findGradesByStudent(req.params.studentId);
+        res.status(200).json(grades);
+    } catch (err) {
+        res.status(500).json({ msg: err.message });
+    }
 };
 
 export const createGradeHandler = async (req, res) => {
-    // TODO: create a new grade from req.body
-    // return 201 on success, 400 on error
+    try {
+        const grade = await createGrade(req.body);
+        res.status(201).json(grade);
+    } catch (err) {
+        res.status(400).json({ msg: err.message });
+    }
 };
 
 export const updateGradeHandler = async (req, res) => {
-    // TODO: update a grade by id
-    // return 404 if not found, 400 on bad id
+    try {
+        const updated = await updateGrade(req.params.id, req.body);
+        if (!updated) return res.status(404).json({ msg: "Grade not found" });
+        res.status(200).json(updated);
+    } catch {
+        res.status(400).json({ msg: "Invalid grade ID" });
+    }
 };
 
 export const deleteGradeHandler = async (req, res) => {
-    // TODO: delete a grade by id
-    // return 404 if not found, 400 on bad id
+    try {
+        const deleted = await deleteGrade(req.params.id);
+        if (!deleted) return res.status(404).json({ msg: "Grade not found" });
+        res.status(200).json({ msg: "Grade deleted" });
+    } catch {
+        res.status(400).json({ msg: "Invalid grade ID" });
+    }
 };
